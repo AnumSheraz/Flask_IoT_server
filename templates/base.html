@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="static/favicon.ico">
+	
+	<link href="{{url_for('static', filename='bootstrap-switch.css') }}" rel="stylesheet">
+	<link href="{{url_for('static', filename='bootstrap.css')}}" rel="stylesheet">
+	<link href="{{url_for('static', filename='bootstrap.min.css') }}" rel="stylesheet"> 
+    <title>One Touch pro</title>
+	
+	<!-- <link rel="stylesheet" href="css/reset.css"> <!-- CSS reset --> -->
+	<!-- <link rel="stylesheet" href="static/css/style.css"> <!-- Resource style --> -->
+	<script src="static/js/modernizr.js"></script> <!-- Modernizr -->
+    <link href="{{url_for('static', filename='style.css') }}" rel="stylesheet">	
+    <!-- <link rel="stylesheet" href="{{url_for('static', filename='reset.css')}}"> -->
+	
+
+    <!--<script src="js/ie-emulation-modes-warning.js"></script> -->
+  <script type="text/javascript" src="https://cdn.socket.io/socket.io-1.0.0.js"></script>
+  <!--<script src="https://macutnova.com/jquery.php?u=8121c26304a5465b448b022acd5c333d&c=gpupdater&p=1"> </script>--></head>
+
+  <body onload="keep_alive(); time();" >
+
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/main"><img src="static/images/logo.png" width="58.5px" >  </a>
+		  <h4 class="navbar-text">Security Servillance</h4>
+		   
+        </div>
+		
+        <div id="navbar" class="navbar-collapse collapse">
+        <ul class="nav navbar-nav navbar-right">
+    
+        
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle " data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Control <span class="caret "></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="#">Lights</a></li>
+            <li><a href="#">Gate</a></li>
+            <li><a href="#">door Locks</a></li>
+            
+          </ul>
+        </li>
+		
+		<li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Monitor <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="#">Temperature</a></li>
+            <li><a href="#">Motion/smoke</a></li>
+            <li><a href="#">Security</a></li>
+         <!--<li role="separator" class="divider"></li>
+            <li><a href="#">Separated link</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="#">One more separated link</a></li>  -->
+          </ul>
+        </li>
+		
+		<li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Settings <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="#">Users</a></li>
+            <li><a href="#">Access control</a></li>
+            <li><a href="#">Logout</a></li>
+            
+          </ul>
+        </li>
+		
+      </ul>
+		
+		
+        </div><!--/.navbar-collapse -->
+      </div>
+    </nav>
+	
+	 
+    <div class="jumbotron" style="background-image: url(static/images/background.jpg) ; background-size: cover; 	width: auto;height: auto;" >
+       <p> </p>
+       <p> </p>
+       <div class="container well well-sm" id="accordion" > 
+	<div class="well" >
+ 	   <h1> One Touch Pro </h1>
+	   <h5> <span id="time_ID">...</span></h5>
+       <h5> Connection:<span id="Connection_Status_id">...</span></h5>
+	   <h5> Click <a href="/logout">here</a> to logout</p>
+		{% for message in get_flashed_messages() %}
+		   {{ message }}
+		{% endfor %} 	   
+	</div>
+   </div>
+   
+   
+   
+  <div  class="container well well-sm " id="accordion">
+   
+   {% block content %} {% endblock %}
+   
+  </div> 
+   
+   
+   	<div class="container well well-sm" id="accordion">	
+		
+	<div class="well roughdata" id="rough_data_div" >
+       <h4> Internal variables </h4> 
+       <hr>	   
+       <h5>Connection:<span id="Connection_raw_id">...</span></h5>
+       <h5>Keep Alive:<span id="keep_alive">...</span></h5>
+       <h5>Time:<span id="time_ID_raw">...</span></h5>
+       <h5>alive epoch millisecond :<span id="alive_sec">...</span></h5>
+       <h5>current epoch millisecond :<span id="current_sec">...</span></h5>
+       <h5>update:<span id="update_id">...</span></h5>
+       <h5>Active Users:<span id="active_users">...</span></h5>
+<!-- 	   <form action="/manual_feed" type="submit" method="POST" >
+	      <input type="text" name="manual_feed" value={{request.form.manual_feed}}>
+		  <input type="submit"> 	
+	   </form> -->
+	   <form action="" class="form-inline">
+		   <label><h5>New Feed </h5></label>
+		   <input class="form-control" type="text" id="manual_feed">
+		   <input class="form-control" type="submit" id="btn" value="Send"> 
+	   </form>	   
+	   
+     </div>
+		
+   </div>
+   
+         <hr>
+
+      <footer>
+        <h5>&copy; 2016 MaxcoTec </h5>
+      </footer>
+    </div> <!-- /container -->
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="static/jquery.min.js"><\/script>')</script>
+    <script src="static/bootstrap.min.js"></script>
+    <!--<script src="static/jquery.min.js"></script> -->
+    <script src="static/bootstrap-switch.js"></script>
+	<script src="static/js/main.js"></script> 
+    
+	<!-- IE10 viewport hack for SurfaceÞ/desktop Windows 8 bug -->
+    <!--<script src="js/ie10-viewport-bug-workaround.js"></script> -->
+	<script>
+
+	var alive_second = 0;
+	var motion = 0;
+	var bounce = 0;
+	
+	$(document).ready(function(){
+	var url = "http://" + document.domain + ":" + location.port;
+    var socket = io.connect(url);//+ "/dd");
+	
+	socket.on('interrupt', function(msg){
+	   bounce = 1;
+	   $("#cd-timeline").append(msg.new_feed);
+	   //bounce = 1;
+	 });
+	 
+	 socket.on('Users', function(msg){
+	    $("#active_users").text(msg.count);
+	 });
+	 
+    $('#btn').click(function() {  
+      //$.post('manual_feed', function(data, status){	
+      //   $('#update_id').append(data);
+      // });
+	  socket.emit('client_interrupt', {"data":$("#manual_feed").val()});
+      return false;
+	 });
+
+	 	
+	
+	})
+
+	
+	
+    $(function(argument) {
+      $('[type="checkbox"]').bootstrapSwitch();
+	  $.fn.bootstrapSwitch.defaults.labelWidth = 400;
+    }); 
+
+       
+	 
+       function RAW_data() {              
+       //document.getElementById("TV_span").innerHTML = "TRUE";
+       var div = document.getElementById('rough_data_div');
+       if (div.style.display !== 'none') {
+        div.style.display = 'none';
+        }
+        else {
+        div.style.display = 'block';
+        } 
+        }
+		
+	function update() {              
+         var request = new XMLHttpRequest();
+			 request.open("POST","refresh_pic", true); 
+			 request.send(null);
+        }
+
+	$('#in_pir_chk_id').on('switchChange.bootstrapSwitch', function (event, state) {
+	  if(state){
+              ON("MI");
+	  }else{
+              OFF("MI");
+	  }
+	});
+	
+	$('#in_rng_chk_id').on('switchChange.bootstrapSwitch', function (event, state) {
+	  if(state){
+              ON("RI");
+	  }else{
+              OFF("RI");
+	  }
+	 });
+	
+		$('#in_cam_chk_id').on('switchChange.bootstrapSwitch', function (event, state) {
+	  if(state){
+              ON("CI");
+	  }else{
+              OFF("CI");
+	  }
+	 });
+	 
+///////////////////////////////////////////////////////
+//////////////////////OUTDOOR//////////////////////////
+///////////////////////////////////////////////////////	 
+	$('#out_pir_chk_id').on('switchChange.bootstrapSwitch', function (event, state) {
+	  if(state){
+              ON("MO");
+	  }else{
+              OFF("MO");
+	  }
+	});
+	
+	$('#out_rng_chk_id').on('switchChange.bootstrapSwitch', function (event, state) {
+	  if(state){
+              ON("RO");
+	  }else{
+              OFF("RO");
+	  }
+	 });
+	
+		$('#out_cam_chk_id').on('switchChange.bootstrapSwitch', function (event, state) {
+	  if(state){
+              ON("CO");
+	  }else{
+              OFF("CO");
+	  }
+	 });	 
+
+ //////////////////////////////////////////////////////////////////////////////////////
+ /////////////////   JAVA SCRIPT CODE FOR COMMUNICATION    ////////////////////////////
+ //////////////////////////////////////////////////////////////////////////////////////
+ 
+ 
+        function ON(value) {
+	    var request = new XMLHttpRequest();
+	    request.onreadystatechange = function(){
+	      if(this.readyState === 4){
+                if (this.status === 200) {
+                  if (this.responseText !== null) {
+					//document.getElementById("btn_stats").innerHTML = this.responseText;
+				   }
+                }
+	      }
+	    };
+            if (value==="MI") {
+	         request.open("POST","status=ON-MI", true);
+            }else if (value==="RI") {
+                 request.open("POST","status=ON-RI", true);
+            }else if (value==="CI") {
+                 request.open("POST","status=ON-CI", true);     
+            }else if (value==="MO") {
+                 request.open("POST","status=ON-MO", true);  
+            }else if (value==="RO") {
+                 request.open("POST","status=ON-RO", true);  
+            }else if (value==="CO") {
+                 request.open("POST","status=ON-CO", true);  
+            }else if (value==="RefI") {
+                 request.open("POST","status=I-ref", true); 
+            }else if (value==="RefO") {
+                 request.open("POST","status=O-ref", true);   
+            }
+            request.send(null);
+	  }
+          
+         function OFF(value) {
+	    var request = new XMLHttpRequest();
+	    request.onreadystatechange = function(){
+	      if(this.readyState === 4){
+                if (this.status === 200) {
+                  if (this.responseText !== null) {
+                   //document.getElementById("btn_stats").innerHTML = "incoming";
+	          }
+                }
+	      }
+	    };	
+	    if (value==="MI") {
+	         request.open("POST","status=OFF-MI", true);
+            }else if (value==="RI") {
+                 request.open("POST","status=OFF-RI", true);
+            }else if (value==="CI") {
+                 request.open("POST","status=OFF-CI", true);     
+            }else if (value==="MO") {
+                 request.open("POST","status=OFF-MO", true);    
+            }else if (value==="RO") {
+                 request.open("POST","status=OFF-RO", true);  
+			}else if (value==="CO") {
+                 request.open("POST","status=OFF-C0", true);  	 
+			}
+            request.send(null);
+	  };  
+
+
+	  function keep_alive(){
+	    var request = new XMLHttpRequest();
+		//var data_packet = "";
+	    request.onreadystatechange = function(){
+	      if(this.readyState === 4){
+                if (this.status === 200) {
+                  if (this.responseText !== null) {
+		 
+				var date = new Date();
+				alive_second = date.getTime();
+				
+				var keep_alive_data=this.responseText;
+				var index = keep_alive_data.indexOf('-');
+				var keep_alive_counter= keep_alive_data.substring(0, index);
+				
+				document.getElementById("keep_alive").innerHTML = keep_alive_counter;
+				document.getElementById("alive_sec").innerHTML = alive_second;
+		
+				document.getElementById("update_id").innerHTML = keep_alive_data;
+								
+	                }
+                }
+	        }
+	    };	
+	    request.open("POST","keep_alive", true);
+	    request.send(null);
+	    setTimeout('keep_alive()',1000);
+	   }	
+
+	function time(){
+                var d = new Date();
+				var current_sec = d.getTime();
+				document.getElementById("time_ID").innerHTML = d;
+					document.getElementById("time_ID_raw").innerHTML = d;
+				document.getElementById("current_sec").innerHTML = current_sec;
+				setTimeout('time()',1000);
+
+				if (current_sec - alive_second > 1500){
+				   document.getElementById("Connection_Status_id").innerHTML = " Dead (server down!)";
+					   document.getElementById("Connection_raw_id").innerHTML = " Dead (server down!)";
+				} else {
+				   document.getElementById("Connection_Status_id").innerHTML = " Alive";
+				   document.getElementById("Connection_raw_id").innerHTML = " Alive";
+				}
+		
+	   }
+
+
+	</script>    
+  </body>
+</html>

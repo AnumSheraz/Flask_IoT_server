@@ -1,0 +1,71 @@
+
+{% extends "base.html" %}
+
+{% block content %}
+
+	<!-- <link href='http://fonts.googleapis.com/css?family=Droid+Serif|Open+Sans:400,700' rel='stylesheet' type='text/css'> -->
+	
+	<!-- <link rel="stylesheet" href="{{url_for('static', filename='reset.css')}}"> <!-- CSS reset --> 
+	<!-- <link rel="stylesheet" href="{{url_for('static', filename='style.css')}}"> <!-- Resource style --> -->
+	<script src="static/js/modernizr.js"></script> <!-- Modernizr -->
+
+
+<section id="cd-timeline">
+	<div class="cd-timeline-block">
+		<div class="cd-timeline-img cd-picture">
+			<img src="static/img/cd-icon-picture.svg" alt="Picture">
+		</div> <!-- cd-timeline-img -->
+ 
+		<div class="cd-timeline-content">
+			<h2>Picture feed</h2>
+			<p>Add you picture here</p>
+			<a href="#0" class="cd-read-more">View log</a>
+			<span class="cd-date">Jan 14</span>
+		</div> <!-- cd-timeline-content -->
+	</div> <!-- cd-timeline-block -->
+ 
+
+	    <div  class="cd-timeline-block">
+			<div class="cd-timeline-img cd-movie">
+				<img src="static/img/cd-icon-movie.svg">
+			</div> <!-- cd-timeline-img -->
+
+			<div class="cd-timeline-content">
+				<h2>Video Feed</h2>
+				<p>Hello this is a Feed</p>
+				   <a href="#0" class="cd-read-more">View</a>
+				<span class="cd-date">Jan 18</span>
+			</div> <!-- cd-timeline-content -->
+	    </div> <!-- cd-timeline-block -->		
+			
+	    <div class="cd-timeline-block">
+			<div class="cd-timeline-img cd-movie">
+				<img src="static/img/cd-icon-movie.svg">
+			</div> <!-- cd-timeline-img -->
+
+			<div class="cd-timeline-content">
+				<h2>Security alert asd</h2>
+				<p>Hello this is a list Feed</p>
+				   <a href="#0" class="cd-read-more">View</a>
+				<span class="cd-date">Jan 18</span>
+			</div> <!-- cd-timeline-content -->
+	    </div> <!-- cd-timeline-block -->
+		
+		{% for n in feed_history["feeds"] %}
+		<div class="cd-timeline-block">
+			<div class="cd-timeline-img cd-{{n[0]}}">
+				<img src="static/img/cd-icon-{{n[0]}}.svg">
+			</div> <!-- cd-timeline-img -->
+
+			<div class="cd-timeline-content">
+				<h2>{{n[1]}}</h2>
+				<p>{{n[2]}}</p>
+				  <!-- <a href="#0" class="cd-read-more">View</a> -->
+				<span class="cd-date">{{n[3]}}</span>
+			</div> <!-- cd-timeline-content -->
+	    </div> <!-- cd-timeline-block -->		
+	    {% endfor %}
+</section>
+
+
+{% endblock %}
