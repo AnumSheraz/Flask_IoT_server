@@ -57,7 +57,7 @@ def new_feed(act, title, content):
 def login_required(f):
     @wraps(f)
     def wrapper(*args, **kwargs):
-        print 'wrapper function ran with args {}'.format(f.__name__)
+        #print 'wrapper function ran with args {}'.format(f.__name__)
         if "logged_in" in session:
            print 'logged in true' 
            return f(*args, **kwargs)
@@ -71,10 +71,7 @@ def login():
     error = None
     session['user'] = None
     global interrupt_thread
-    if interrupt_thread == None:
-       interrupt_thread = threading.Thread(target=manual_test)
-       interrupt_thread.start()
-    #print "got /"    
+   
     if request.method == 'POST':
         if request.form['password'] != "poi": #or request.form['user'] != 'anum' or :
             print "GOT ERROR"
