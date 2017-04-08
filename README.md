@@ -2,6 +2,8 @@
 A webServer for IoT application, created on Flask using websockets as communication protocol. Its not a complete yet !
 
 Instruction to use:
+Before running, ensure that all neessary packages are installed listed in requirments.txt file
+
 1. currently the server runs on local host (127.0.0.1:80), change it (in line 180) if required.
 2. Run the code, and type in the IP address of the server into your web browser.
 3. Use ogin details, username as your name and password is "poi"
@@ -11,6 +13,8 @@ Instruction to use:
 7. to add new feed, write the feed in the text box located at bottom (inside internal variables box), and press enter.
 8. Multiple users can login at any time and chat with each other aswell. 
 9. Go to Control page (from main menu) and you'll see switch controls for each room. 
+
+Tested on Python 2.7
 
 
 
